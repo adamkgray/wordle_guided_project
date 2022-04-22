@@ -13,6 +13,12 @@ def yellow(string):
     return YELLOW + string + END
 
 
+def black(string):
+    BLACK = '\033[30m'
+    END = '\033[0m'
+    return BLACK + string + END
+
+
 def readfile(file_path):
     with open(file_path, "r") as f:
         lines = []
@@ -29,7 +35,7 @@ def random_answer(answers):
 def get_guess(guesses):
     guess = input("> ")
     while guess not in guesses:
-        guess = ("> ")
+        guess = input("> ")
     return guess
 
 
@@ -37,7 +43,7 @@ def accuracy(guess, answer):
     colored_guess = ""
     for i in range(5):
         if guess[i] not in answer:
-            colored_guess += guess[i]
+            colored_guess += black(guess[i])
         elif guess[i] == answer[i]:
             colored_guess += green(guess[i])
         else:
@@ -57,7 +63,7 @@ answer = random_answer(answers)
 # take 6 turns
 for i in range(6):
     # show turn number
-    print("guess #{}".format(i - 1))
+    print("guess #{}".format(i + 1))
 
     # get guess from user
     guess = get_guess(answers)
